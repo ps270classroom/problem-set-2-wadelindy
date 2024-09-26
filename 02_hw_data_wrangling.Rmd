@@ -82,9 +82,9 @@ party_incumbent_promote <- fb_ads |>
   group_by(party, incumbency) |>
   summarize(promote_prop = mean(ad_tone_promote, na.rm = TRUE))
 
-party_incumbent_promote
-
 knitr::kable(party_incumbent_promote, col.names = c("Party", "Incumbent status", "Self-Promotion Ad Proportion"))
+
+party_incumbent_promote
 ```
 
 \newpage
@@ -134,6 +134,7 @@ You do not need to exactly match the labels, but you should have informative lab
 ## Answer 4
 
 ```{r}
+
 fb_top_plot <- fb_ads |>
     filter(office == "US House") |>
   arrange(desc(impressions_millions)) |>
@@ -150,6 +151,7 @@ fb_top_plot <- ggplot(fb_top_plot, mapping = aes(x = impressions_millions,
        y = "Candidate's Name")
 
 fb_top_plot
+
 ```
 
 \newpage
