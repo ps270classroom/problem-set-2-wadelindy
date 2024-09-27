@@ -91,7 +91,6 @@ knitr::kable(party_incumbent_promote, digits = 3, col.names = c("Party", "Incumb
 
 ## Question 3 (7 points)
 
-
 Create a new variable called `impressions_millions` that is the total Facebook ad impressions in millions (as opposed to single impressions). Make sure to save the resulting dataset back as `fb_ads`.
 
 Create a histogram of this variable for just the US House races. Save the ggplot output as `plot_q3` and also print it to produce a plot in the output. In the text, describe the shape of the histogram and tell the reader if most of the House candidates had more than 10 million ads impressions on Facebook. 
@@ -140,7 +139,7 @@ fb_top_plot <- fb_ads |>
 fb_top_plot <- ggplot(fb_top_plot, mapping = aes(x = impressions_millions, 
                                         y = reorder(cand_name_last,
                                                         impressions_millions))) +
-  geom_bar(fill = party) +
+  geom_col(aes(fill = party)) +
   scale_fill_manual(values = c(R = "red", D = "blue")) +
   labs(title = "Top 15 U.S. House Candidates by Millions of Facebook Impressions",
        x = "Facebook Impressions (in millions)",
