@@ -102,12 +102,18 @@ Create a histogram of this variable for just the US House races. Save the ggplot
 fb_ads <- fb_ads |>
   mutate(impressions_millions = impressions / 1000000)
 
-plot_q3 <- ggplot(data = fb_ads,
-                  mapping = aes(x = impressions_millions)) +
-  geom_histogram()
+fb_ads_2 <- fb_ads |>
+  filter(office == "US House")
 
+plot_q3 <- ggplot(data = fb_ads_2, aes(x = impressions_millions)) +
+  geom_histogram(fill = "darkorchid3") +
+  labs(title = "Distribution of Facebook Ad Impressions for US House Candidates",
+       x = "Impressions (in millions)", y = "Number of Candidates")
+  
 plot_q3
 ```
+
+
 \newpage
 
 ## Question 4 (13 points)
@@ -137,7 +143,7 @@ fb_top_plot <- fb_ads |>
   slice_max(impressions_millions / 1000000, n = 15)
 
 fb_top_plot <- ggplot(fb_top_plot, mapping = aes(x = impressions_millions, 
-                                        y = reorder(cand_name_last,
+                                        y = fct_reorder(cand_name_last,
                                                         impressions_millions))) +
   geom_col(aes(fill = party)) +
   scale_fill_manual(values = c(R = "red", D = "blue")) +
