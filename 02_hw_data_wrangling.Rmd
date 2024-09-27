@@ -84,7 +84,7 @@ party_incumbent_promote <- fb_ads |>
 
 party_incumbent_promote
 
-knitr::kable(party_incumbent_promote, col.names = c("Party", "Incumbent Status", "Self-Promotion Ad Proportion"))
+knitr::kable(party_incumbent_promote, digits = 3, col.names = c("Party", "Incumbent Status", "Self-Promotion Ad Proportion"))
 ```
 
 \newpage
@@ -103,11 +103,8 @@ Create a histogram of this variable for just the US House races. Save the ggplot
 fb_ads <- fb_ads |>
   mutate(impressions_millions = impressions / 1000000)
 
-fb_ads |>
-  filter(office == "US House")
-
 plot_q3 <- ggplot(data = fb_ads,
-                  mapping = aes(x= impressions_millions)) +
+                  mapping = aes(x = impressions_millions)) +
   geom_histogram()
 
 plot_q3
@@ -129,7 +126,7 @@ You should save the `ggplot` output as `fb_top_plot`. You should also write `fb_
 
 You do not need to exactly match the labels, but you should have informative labels. The color does not need to match, but if you want to change the fill colors, you can use the `scale_fill_manual(values = c(R = "red", D = "blue"))` function (where you can change the red and blue to whatever you want). 
 
- **Rubric:** 3pts for correct axes (autograder); 3pts for correct data fed into `ggplot` (autograder); 3pts for the correct ordering of the y-axis (PDF); 3pts for fill being mapped to `party` (autograder); 1pt for plot being in knitted output and having informative labels (PDF)
+ **Rubric:** 3pts for correct axes (autograder); 3pts for correct data fed into `ggplot` (autograder); 3pts for the correct ordering of the y-axis (PDF); 3pts for fill being mapped to `party` (autograder); 1pt for plot being in knitted output and having informative labels (PDF).
 
 ## Answer 4
 
@@ -142,9 +139,8 @@ fb_top_plot <- fb_ads |>
 
 fb_top_plot <- ggplot(fb_top_plot, mapping = aes(x = impressions_millions, 
                                         y = reorder(cand_name_last,
-                                                        impressions_millions), 
-                                        fill = party)) +
-  geom_col() +
+                                                        impressions_millions))) +
+  geom_bar(fill = party) +
   scale_fill_manual(values = c(R = "red", D = "blue")) +
   labs(title = "Top 15 U.S. House Candidates by Millions of Facebook Impressions",
        x = "Facebook Impressions (in millions)",
